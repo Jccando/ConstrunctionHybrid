@@ -2,7 +2,7 @@
 
 **Hybrid Machine Learning and Knowledge-Enhanced Learning for Construction Cost Estimation**
 
-This repository contains the code and experimental resources for a study on machine learning-based construction cost estimation. The project investigates conventional machine learning models, hybrid optimization-based models, temporal generalization, model interpretability, and construction-domain knowledge enhancement across multiple real-world datasets.
+This repository contains the code and experimental resources for studying machine learning-based construction cost estimation. The project investigates conventional machine learning models, hybrid optimization-based models, temporal generalization, model interpretability, and construction-domain knowledge enhancement across multiple real-world datasets.
 
 ---
 
@@ -10,20 +10,42 @@ This repository contains the code and experimental resources for a study on mach
 
 Construction cost estimation is a challenging regression problem due to the heterogeneous characteristics of construction projects, nonlinear relationships between project attributes and cost, temporal variations, and the availability of domain-specific knowledge.
 
-This project evaluates whether hybrid machine learning and knowledge-enhanced approaches can improve construction cost estimation compared with conventional single-model approaches.
+This project investigates whether hybrid machine learning and knowledge-enhanced approaches can improve construction cost estimation compared with conventional single-model approaches.
 
-The repository includes experiments covering:
+The overall motivation of this study is illustrated in Figure 1.
 
-- Conventional machine learning regression
-- Ensemble and stacking methods
-- Optimization-based hybrid learning
-- Temporal generalization
-- SHAP-based model interpretation
-- Construction-domain knowledge enhancement
-- Retrieval-augmented cost estimation
-- Cross-dataset evaluation
+<p align="center">
+  <img src="readmeFig/Fig1_motivation.png" alt="Motivation of ConstructionHybrid" width="90%">
+</p>
 
-The experiments use several construction- and building-related datasets, including the UCI Residential Building Dataset, NYC School Construction Authority (SCA) project data, DDC/CWICR construction knowledge data, and ComStock.
+**Figure 1. Motivation of the study.**  
+The figure illustrates the challenges of construction cost estimation and the motivation for developing hybrid and knowledge-enhanced learning approaches.
+
+---
+
+## Method Overview
+
+The overall framework of ConstructionHybrid is illustrated in Figure 2.
+
+<p align="center">
+  <img src="readmeFig/Fig2_method.png" alt="Overview of the ConstructionHybrid framework" width="90%">
+</p>
+
+**Figure 2. Overview of the ConstructionHybrid framework.**  
+The framework integrates conventional machine learning, hybrid learning, and construction-domain knowledge enhancement for construction cost estimation across multiple datasets and experimental settings.
+
+---
+
+## Main Contributions
+
+The project focuses on the following research directions:
+
+- **Hybrid machine learning:** Combining conventional machine learning models with optimization and ensemble strategies for construction cost estimation.
+- **Robust evaluation:** Evaluating model performance across multiple construction-related datasets and experimental settings.
+- **Temporal generalization:** Investigating how construction cost estimation models perform under temporal distribution shifts.
+- **Model interpretability:** Using SHAP-based analysis to identify important project and construction features.
+- **Construction-domain knowledge enhancement:** Incorporating structured construction knowledge into machine learning-based cost estimation.
+- **Retrieval-augmented cost estimation:** Retrieving relevant construction work items from a domain-specific knowledge base and incorporating the retrieved information into prediction.
 
 ---
 
@@ -63,16 +85,21 @@ ConstrunctionHybrid/
 │       ├── nyc_sca/
 │       └── uci_437/
 │
+├── readmeFig/
+│   ├── Fig1_motivation.png
+│   └── Fig2_method.png
+│
 └── README.md
 ```
 
 ### Main Components
 
-- `code/baseline/`: Experimental scripts for different datasets and research questions.
+- `code/baseline/`: Main experimental scripts for different datasets and research questions.
 - `code/utils/datasets.py`: Dataset loading and preprocessing utilities.
 - `code/utils/metaheuristics.py`: Metaheuristic optimization methods used by hybrid models.
 - `code/utils/metrics.py`: Evaluation metrics and statistical analysis utilities.
 - `dataset/raw/`: Raw datasets required by the experiments.
+- `readmeFig/`: Figures used to illustrate the motivation and overall methodology.
 - `experimentresult/`: Experimental outputs, tables, and figures.
 
 ---
@@ -81,7 +108,7 @@ ConstrunctionHybrid/
 
 The experiments are implemented in **Python 3.10+**.
 
-We recommend using a virtual environment.
+A virtual environment is recommended.
 
 ### Create a virtual environment
 
@@ -117,7 +144,9 @@ pip install shap matplotlib openpyxl pyarrow
 
 ## Dataset Preparation
 
-The experiments use multiple datasets. Raw data should be placed under:
+The experiments use multiple construction- and building-related datasets.
+
+Raw datasets should be placed under:
 
 ```text
 dataset/raw/
@@ -133,7 +162,7 @@ dataset/raw/
 └── comstock/
 ```
 
-### 1. UCI Residential Building Dataset
+### UCI Residential Building Dataset
 
 The UCI Residential Building Dataset is used for the main methodological comparison.
 
@@ -141,12 +170,11 @@ Expected location:
 
 ```text
 dataset/raw/uci_437/
-└── Residential-Building-Data-Set.xlsx
 ```
 
-The dataset is used as a regression problem for construction cost estimation.
+The dataset is formulated as a regression problem for construction cost estimation.
 
-### 2. NYC SCA Capital Projects
+### NYC SCA Capital Projects
 
 The NYC School Construction Authority (SCA) dataset is used to evaluate construction cost estimation on real-world public construction projects.
 
@@ -154,14 +182,13 @@ Expected location:
 
 ```text
 dataset/raw/nyc_sca/
-└── nyc_sca_capital_projects.csv
 ```
 
 The experiments use project-level and phase-level information together with derived project characteristics.
 
-### 3. DDC / CWICR Construction Knowledge Base
+### DDC / CWICR Construction Knowledge Base
 
-The DDC/CWICR dataset provides construction-domain knowledge used in the knowledge-enhanced and retrieval-augmented experiments.
+The DDC/CWICR dataset provides construction-domain knowledge for the knowledge-enhanced and retrieval-augmented experiments.
 
 Expected location:
 
@@ -171,7 +198,7 @@ dataset/raw/ddc_cwicr_zh/
 
 The knowledge base contains construction work-item and cost-related information that can be retrieved and incorporated into the prediction pipeline.
 
-### 4. ComStock
+### ComStock
 
 The ComStock dataset is used as an additional evaluation dataset for building-related cost estimation.
 
@@ -193,7 +220,9 @@ code/baseline/
 
 Each experiment can be executed independently.
 
-> **Note:** Before running the experiments, make sure that the dataset paths in `code/utils/datasets.py` match the directory structure of your local copy.
+> **Note:** Before running an experiment, make sure that the dataset paths in `code/utils/datasets.py` match the directory structure of your local copy.
+
+---
 
 ### E1 — UCI Residential Building Dataset
 
@@ -219,11 +248,13 @@ Run:
 python code/baseline/e1_uci.py
 ```
 
-The experiment evaluates prediction performance using metrics including:
+The experiment evaluates prediction performance using:
 
 - MAPE
 - RMSE
 - R²
+
+---
 
 ### E2 — NYC SCA Construction Cost Estimation
 
@@ -237,6 +268,8 @@ Run:
 python code/baseline/e2_nyc.py
 ```
 
+---
+
 ### E3 — Temporal Generalization
 
 Construction cost estimation models may experience performance changes when applied to projects from different time periods.
@@ -249,11 +282,13 @@ Run:
 python code/baseline/e3_temporal.py
 ```
 
+---
+
 ### E4 — SHAP-Based Model Interpretation
 
 The E4 experiment investigates model interpretability using SHAP.
 
-The analysis is used to identify important features contributing to construction cost predictions and to better understand the relationship between project characteristics and model outputs.
+The analysis identifies important features contributing to construction cost predictions and helps characterize the relationship between project characteristics and model outputs.
 
 Run:
 
@@ -267,6 +302,8 @@ For the NYC-specific SHAP analysis:
 python code/baseline/e4b_nyc_shap.py
 ```
 
+---
+
 ### E5 — DDC Knowledge-Enhanced Cost Estimation
 
 The E5 experiment investigates whether construction-domain knowledge can improve machine learning-based cost estimation.
@@ -279,7 +316,9 @@ Run:
 python code/baseline/e5_ddc.py
 ```
 
-The experiment is designed to evaluate whether domain-specific construction knowledge provides additional predictive information beyond conventional project metadata.
+This experiment evaluates whether domain-specific construction knowledge provides additional predictive information beyond conventional project metadata.
+
+---
 
 ### E5b — Retrieval-Augmented Cost Estimation
 
@@ -306,6 +345,8 @@ python code/baseline/e5b_rag.py
 ```
 
 This experiment provides a lightweight retrieval-augmented framework for integrating construction-domain knowledge into machine learning-based cost estimation.
+
+---
 
 ### E6 — ComStock Evaluation
 
@@ -341,7 +382,7 @@ Root Mean Squared Error:
 RMSE = sqrt(mean((y - ŷ)²))
 ```
 
-RMSE penalizes larger prediction errors more strongly and is used to measure the overall magnitude of prediction errors.
+RMSE penalizes larger prediction errors more strongly and measures the overall magnitude of prediction errors.
 
 ### R²
 
@@ -478,7 +519,7 @@ The experimental results include:
 - Retrieval-augmented learning results
 - Visualization figures
 
-Generated experimental outputs are organized under the experiment result directories.
+Generated experimental outputs are organized under the corresponding experiment result directories.
 
 ---
 
