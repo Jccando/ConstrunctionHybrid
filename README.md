@@ -1,79 +1,26 @@
-# ConstructionHybrid
+ConstructionHybrid
 
-A hybrid machine learning framework for construction cost estimation.
+Hybrid Machine Learning and Knowledge-Enhanced Learning for Construction Cost Estimation
 
-This repository contains the code, datasets, and experimental scripts for
-evaluating hybrid learning methods for construction cost estimation across
-multiple real-world construction datasets.
+This repository contains the implementation and experimental code for studying machine learning and hybrid learning methods for construction cost estimation.
 
-The project investigates whether hybrid models and knowledge-enhanced
-learning strategies can improve construction cost prediction compared with
-conventional single-model approaches.
+The project evaluates conventional machine learning models, hybrid optimization-based models, temporal generalization, model interpretability, and construction-domain knowledge enhancement across multiple real-world datasets.
 
----
+Overview
 
-## Overview
+Construction cost estimation is a challenging regression problem due to the heterogeneous nature of construction projects, nonlinear relationships between project characteristics and cost, temporal variation, and the availability of domain-specific construction knowledge.
 
-Construction cost estimation is a challenging regression problem because
-construction projects often involve heterogeneous features, nonlinear
-relationships, temporal effects, and domain-specific knowledge.
+This project investigates whether hybrid machine learning and knowledge-enhanced approaches can improve construction cost estimation compared with conventional single-model approaches.
 
-This project evaluates a range of conventional machine learning models and
-hybrid learning strategies, including:
+The repository includes experiments covering:
 
-- Support Vector Regression (SVR)
-- Random Forest (RF)
-- LightGBM
-- XGBoost
-- CatBoost
-- Artificial Neural Networks (ANN)
-- NGBoost
-- Gaussian Process Regression (GPR)
-- Stacking
-- PSO-SVR
-- GA-ANN
-- Retrieval-Augmented / knowledge-enhanced cost estimation
+Conventional machine learning regression
+Ensemble and stacking methods
+Optimization-based hybrid learning
+Temporal generalization
+SHAP-based model interpretation
+Construction-domain knowledge enhancement
+Retrieval-augmented construction cost estimation
+Cross-dataset evaluation
 
-The experiments are conducted on multiple construction-related datasets to
-evaluate model effectiveness, temporal generalization, interpretability,
-and the value of construction-domain knowledge.
-
----
-
-## Repository Structure
-
-```text
-ConstrunctionHybrid/
-│
-├── code/
-│   ├── baseline/
-│   │   ├── e1_uci.py
-│   │   ├── e2_nyc.py
-│   │   ├── e3_temporal.py
-│   │   ├── e4_shap.py
-│   │   ├── e4b_nyc_shap.py
-│   │   ├── e5_ddc.py
-│   │   ├── e5b_rag.py
-│   │   ├── e6_comstock.py
-│   │   ├── analysis.py
-│   │   └── ...
-│   │
-│   ├── utils/
-│   │   ├── datasets.py
-│   │   ├── metaheuristics.py
-│   │   ├── metrics.py
-│   │   └── __init__.py
-│   │
-│   └── catboost_info/
-│
-├── dataset/
-│   └── raw/
-│       ├── uci_437/
-│       ├── nyc_sca/
-│       ├── ddc_cwicr_zh/
-│       └── comstock/
-│
-├── exprimentresult/
-│   └── figures/
-│
-└── README.md
+The main experiments are conducted using the UCI Residential Building Dataset, NYC School Construction Authority (SCA) project data, DDC/CWICR construction knowledge data, and ComStock data. The current repository contains these dataset directories under dataset/raw/.
