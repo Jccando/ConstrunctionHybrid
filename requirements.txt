@@ -1,0 +1,28 @@
+# Retrieval-Augmented Hybrid Learning for Public-Building Cost Estimation
+# Python 3.10+ required. Install with:  pip install -r requirements.txt
+#
+# Minimum versions the code relies on are given as lower bounds. If you need a fully
+# pinned environment for exact reproduction, run `pip freeze > requirements-lock.txt`
+# in the environment that produced your results and record it alongside them.
+
+# --- Core numerical / data handling ---
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+
+# --- Machine learning ---
+scikit-learn>=1.3
+xgboost>=2.0
+lightgbm>=4.0
+catboost>=1.2
+ngboost>=0.5
+
+# --- Explainability ---
+shap>=0.44
+
+# --- Plotting ---
+matplotlib>=3.7
+
+# --- File format readers ---
+openpyxl>=3.1        # reading the UCI #437 .xlsx workbook
+pyarrow>=14.0        # reading the ComStock and DDC .parquet files
