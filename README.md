@@ -5,6 +5,32 @@ Public-Building Cost Estimation"** (Lyu, S.), which proposes a framework that co
 ensemble of four diverse learners with a retrieval module over an open construction cost-knowledge
 base, for design-stage cost estimation of public buildings.
 
+## Motivation and framework
+
+<p align="center">
+  <img src="readmeFig/Fig1_motivation.png" alt="Motivation of the study" width="90%">
+</p>
+
+**Figure 1. Motivation of the study.** Roughly 70–80 % of a public building's cost is locked in at
+design, yet estimates at that stage suffer chronic problems — cost overruns, inaccurate early
+estimates, and reactive cost control. Three research gaps compound them: machine-learning cost models
+target residential and real-estate data rather than public buildings, single models carry no
+construction-domain knowledge, and public-building cost data are scarce. This work addresses all
+three by combining hybrid learning with an open construction cost-knowledge base.
+
+<p align="center">
+  <img src="readmeFig/Fig2_method.png" alt="Overview of the framework" width="90%">
+</p>
+
+**Figure 2. Overview of the framework.** Four stages: **data sources** (UCI #437, NYC SCA, ComStock)
+together with the **DDC construction cost-knowledge base**; **knowledge-augmented feature
+engineering**, which builds the hierarchical context M₀ (metadata) → M₁ (work scope) → M₂ (retrieved
+knowledge) through the RAG cycle and fuses the retrieved knowledge K into enhanced features
+`Z = Φ(X, K)`; the **stacking ensemble**, in which four base learners `f₁`–`f₄` (XGBoost, LightGBM,
+CatBoost, ANN) produce a prediction matrix `P` that a Ridge meta-learner maps to the estimate `Ŷ`;
+and the **outputs** — the cost estimate with a 90 % prediction interval plus global and local SHAP
+attributions, for design-stage cost management.
+
 ---
 
 ## Description
@@ -112,6 +138,9 @@ code/
 └── experimentresult/       # All outputs (created automatically): tables/*.csv, figures/*.png
 ```
 
+The repository root also holds `dataset/` (raw data, see above), `readmeFig/` (the motivation and
+framework figures used in this README), `requirements.txt`, and `.gitignore`.
+
 **Model family covered.** Single learners: grid-search SVR, Random Forest, LightGBM, XGBoost,
 CatBoost, ANN, NGBoost, Gaussian Process Regression. Hybrid learners: Stacking, PSO-SVR, GA-ANN.
 
@@ -126,7 +155,19 @@ training folds **or** on the external DDC base only — never on test data.
 
 ### 1. Requirements
 
-Python **3.10+** is required. Install the dependencies:
+Python **3.10+** is required. A virtual environment is recommended:
+
+```bash
+python -m venv .venv
+
+# Windows
+.venv\Scripts\activate
+
+# Linux / macOS
+source .venv/bin/activate
+```
+
+Then install the dependencies:
 
 ```bash
 pip install -r requirements.txt
